@@ -1,1 +1,36 @@
-.github/workflows/soapui-tests.yml
+name: Run SoapUI Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  soapui-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      - name: Download SoapUI
+        run: |
+          wget https://s3.amazonaws.com/SmartBear_Software/soapui/5.8.0/SoapUI-5.8.0-linux-bin.tar.gz
+          tar -xzf SoapUI-5.8.0-linux-bin.tar.gz
+
+      - name: Run SoapUI Tests
+        run: |
+          ./SoapUI-5.8.0/bin/testrunner.sh -r -j -f soapui-reports MyProject.xml
+
+      - name: Upload JUnit Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: soapui-junit-reports
+          path: soapui-reports/*.xml
