@@ -19,16 +19,16 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # Step 3: Scarica SoapUI 5.9.1
-      - name: Download SoapUI 5.9.1
+      # Step 3: Scarica SoapUI 5.7.2
+      - name: Download SoapUI 5.7.2
         run: |
-          wget https://github.com/SmartBear/soapui/releases/download/v5.9.1/SoapUI-5.9.1-linux-bin.tar.gz
-          tar -xzf SoapUI-5.9.1-linux-bin.tar.gz
+          wget https://dl.eviware.com/soapuios/5.7.2/SoapUI-5.7.2-linux-bin.tar.gz
+          tar -xzf SoapUI-5.7.2-linux-bin.tar.gz
 
       # Step 4: Esegui i test SoapUI
       - name: Run SoapUI Tests
         run: |
-          ./SoapUI-5.9.1/bin/testrunner.sh -r -j -f soapui-reports MyProject.xml
+          ./SoapUI-5.7.2/bin/testrunner.sh -r -j -f soapui-reports MyProject.xml
 
       # Step 5: Carica i report JUnit come artifact
       - name: Upload JUnit Reports
