@@ -9,22 +9,22 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Install Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '11'
+          java-version: '17'
 
-      - name: Download SoapUI
+      - name: Download SoapUI 5.9.1
         run: |
-          wget https://s3.amazonaws.com/SmartBear_Software/soapui/5.8.0/SoapUI-5.8.0-linux-bin.tar.gz
-          tar -xzf SoapUI-5.8.0-linux-bin.tar.gz
+          wget https://github.com/SmartBear/soapui/releases/download/5.9.1/SoapUI-5.9.1-linux-bin.tar.gz
+          tar -xzf SoapUI-5.9.1-linux-bin.tar.gz
 
       - name: Run SoapUI Tests
         run: |
-          ./SoapUI-5.8.0/bin/testrunner.sh -r -j -f soapui-reports MyProject.xml
+          ./SoapUI-5.9.1/bin/testrunner.sh -r -j -f soapui-reports MyProject.xml
 
       - name: Upload JUnit Reports
         uses: actions/upload-artifact@v4
