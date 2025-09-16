@@ -8,24 +8,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Prendi i file dal repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Step 2: Installa Java (necessario per SoapUI)
       - name: Install Java
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
+      # Step 3: Scarica SoapUI 5.9.1
       - name: Download SoapUI 5.9.1
         run: |
-          wget https://github.com/SmartBear/soapui/releases/download/5.9.1/SoapUI-5.9.1-linux-bin.tar.gz
+          wget https://github.com/SmartBear/soapui/releases/download/v5.9.1/SoapUI-5.9.1-linux-bin.tar.gz
           tar -xzf SoapUI-5.9.1-linux-bin.tar.gz
 
+      # Step 4: Esegui i test SoapUI
       - name: Run SoapUI Tests
         run: |
           ./SoapUI-5.9.1/bin/testrunner.sh -r -j -f soapui-reports MyProject.xml
 
+      # Step 5: Carica i report JUnit come artifact
       - name: Upload JUnit Reports
         uses: actions/upload-artifact@v4
         with:
