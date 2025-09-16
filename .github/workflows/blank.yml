@@ -28,7 +28,7 @@ jobs:
       # Step 4: Esegui i test SoapUI
       - name: Run SoapUI Tests
         run: |
-          ./SoapUI-5.7.2/bin/testrunner.sh -r -j -f soapui-reports soapui-tests.xml
+            ./SoapUI-5.7.2/bin/testrunner.sh -r -j -f soapui-reports ESITO-KO.xml
 
       # Step 5: Carica i report JUnit come artifact
       - name: Upload JUnit Reports
