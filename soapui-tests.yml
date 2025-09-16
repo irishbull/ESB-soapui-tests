@@ -32,7 +32,7 @@ jobs:
 
       # Step 5: Carica i report JUnit come artifact
       - name: Upload JUnit Reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: soapui-junit-reports
           path: soapui-reports/*.xml
