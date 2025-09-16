@@ -27,7 +27,7 @@ jobs:
           ./SoapUI-5.8.0/bin/testrunner.sh -r -j -f soapui-reports MyProject.xml
 
       - name: Upload JUnit Reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: soapui-junit-reports
           path: soapui-reports/*.xml
